@@ -1,0 +1,31 @@
+.fist-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+.fist-div h1{
+    background-color: rgb(183, 216, 139);
+    padding: 20px;
+    width: 50%;
+
+}
+.fist-div p{
+ background-color: blanchedalmond;
+ padding: 20px;
+ width: 50%;
+}
+
+#main-heading{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background-color: black; */
+    color: red;
+}
+
+
+.video{
+    
+}
+
+

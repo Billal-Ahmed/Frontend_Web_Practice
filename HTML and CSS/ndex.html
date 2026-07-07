@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            /* background-color: rgb(118, 126, 126); */
+            border: 5px solid rgb(102, 98, 98);
+            border-radius: 10px;
+            margin: 15px;
+            width: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<body>
+    <!-- <div>
+    <h1>
+        Hello
+    </h1>
+    </div> -->
+
+    <div class="container">
+        <div class="child">
+            <img src="" alt="" id="image">
+            <p id="title"></p>
+            <button id="button"></button>
+            <div>
+                <p style="font-size: large; display: flex; flex-direction: row;">
+                    <sup id="currency"></sup><span id="price"></span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        // let name = "Wilayat"
+        // console.log(name)
+        // document.write(name)i
+
+        // retriving data from dom
+        
+        let image_tag = document.getElementById("image")
+        let title = document.getElementById("title")
+        let btn = document.getElementById("button")
+        let currency = document.getElementById("currency")
+        let price = document.getElementById("price")
+
+
+        let product = {
+            img_url : "./Dpark_It_logo.jpg",
+            title: "Parker Lorem ipsum dolor sit amet consectetur adipisicing.",
+            button_content: "Deal for the day",
+            price: 270,
+            currency: "$"
+        }
+
+        image_tag.src = product.img_url;
+        title.innerHTML = product.title;
+        btn.innerHTML = product.button_content;
+        currency.innerHTML = product.currency;
+        price.innerHTML = product.price;
+
+
+
+    </script>
+    <!-- <script src=""></script> -->
+</body>
+</html>

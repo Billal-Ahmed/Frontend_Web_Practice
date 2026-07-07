@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Box CSS</title>
+    <style>
+        .container{
+            background-color: beige;
+            padding: 20px;
+            display: flex;
+            gap:20px;
+            /* align-items: center; */
+            /* justify-content: space-evenly; */
+            height: 300px;
+            flex-wrap: wrap;
+            /* flex-grow: 2; */
+        }
+        .container div{
+            /* background-color: rgb(224, 212, 196); */
+            /* padding: 10px; */
+            /* margin: 5px; */
+            cursor: pointer;
+            color: black;
+        }
+        .container div a{
+            text-decoration: none;
+            color: black;
+        }
+        .container div a:hover{
+            /* background-color: rgb(197, 190, 182); */
+            color: rgb(83, 77, 77);
+
+        }
+        .child-fifth{
+            /* font-size: 20px; */
+            /* align-self: center; */
+            border: 2px solid black;
+        }
+        .child-fourth{
+            border: 2px solid black;
+            /* width: 200px; */
+            /* flex-shrink: 2; */
+                        /* flex-grow: 2; */
+
+
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="child-first"><a href="./api.html">Home</a></div>
+        <div class="child-second"><a href="./BasicTodoapp.html">About</a></div>
+        <div class="child-third"><a href="./cryptoAPI.html">Contact</a></div>
+        <div class="child-fourth"><a href="./cryptoAPI.html">SignIn</a></div>
+        <div class="child-fifth"><a href="./imagetag.html">SignUp</a></div>
+    </div>
+    
+</body>
+</html>

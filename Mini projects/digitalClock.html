@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sleek Digital Clock</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#0f172a; /* slate-900 */
+      --bg2:#1e293b; /* slate-800 */
+      --fg:#e2e8f0;   /* slate-200 */
+      --accent:#22d3ee; /* cyan-400 */
+      --accent2:#a78bfa;/* violet-400 */
+      --glass: rgba(255,255,255,.08);
+      --glass-stroke: rgba(255,255,255,.2);
+      --shadow: 0 20px 50px rgba(0,0,0,.45);
+    }
+
+    /* Background */
+    body{
+      margin:0; min-height:100svh; color:var(--fg);
+      display:grid; place-items:center; overflow:hidden;
+      background: radial-gradient(1200px 800px at 80% 20%, rgba(34,211,238,.15), transparent 60%),
+                  radial-gradient(1000px 700px at 20% 80%, rgba(167,139,250,.15), transparent 55%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    /* Floating orbs */
+    .orb{
+      position: absolute; filter: blur(50px); opacity:.35; mix-blend-mode: screen;
+      animation: float 14s ease-in-out infinite;
+      pointer-events:none;
+    }
+    .orb.one{ width:380px; height:380px; background: radial-gradient(circle, #22d3ee, transparent 60%); top:8%; left:6%; animation-delay: -2s; }
+    .orb.two{ width:460px; height:460px; background: radial-gradient(circle, #a78bfa, transparent 60%); bottom:6%; right:8%; animation-duration: 18s; }
+    @keyframes float{ 0%,100%{ transform: translateY(-10px) } 50%{ transform: translateY(10px) } }
+
+    /* Card */
+    .card{
+      position:relative; z-index:2; width:min(92vw, 900px);
+      border-radius: 24px; padding: 28px 28px 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-stroke);
+      box-shadow: var(--shadow);
+    }
+
+    .header{
+      display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px;
+    }
+    .title{
+      font-weight:800; letter-spacing:.4px; font-size:clamp(16px, 2.3vw, 20px);
+      text-transform: uppercase; opacity:.9
+    }
+
+    /* Clock */
+    .clock{
+      display:flex; align-items:flex-end; justify-content:center; gap: clamp(18px, 3vw, 36px);
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      user-select:none; text-align:center;
+    }
+
+    .time-part{
+      display:flex; align-items:baseline; gap: clamp(6px, 1vw, 10px);
+    }
+
+    .hh, .mm, .ss{
+      font-weight:800; line-height:1; letter-spacing: -1.5px;
+      font-size: clamp(56px, 12vw, 144px);
+      text-shadow: 0 0 20px rgba(34,211,238,.35), 0 0 40px rgba(167,139,250,.25);
+    }
+
+    .sep{ 
+      font-weight:800; line-height: .8; opacity:.75;
+      font-size: clamp(40px, 10vw, 120px); 
+      animation: blink 1.6s steps(2, jump-none) infinite;
+    }
+    @keyframes blink{ 50%{ opacity:.18 } }
+
+    .ampm{
+      font-weight:600; opacity:.85; margin-left: 6px; margin-bottom: clamp(8px, 1vw, 12px);
+      font-size: clamp(12px, 1.4vw, 16px);
+      padding: 4px 8px; border-radius:999px; border:1px solid var(--glass-stroke);
+      background: rgba(255,255,255,.06);
+      text-transform: uppercase; letter-spacing:.8px;
+    }
+
+    .meta{
+      margin-top: 10px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;
+      opacity:.9
+    }
+    .date{ font-weight:600; letter-spacing:.3px }
+    .tz{ font-variant-numeric: tabular-nums; opacity:.8 }
+
+    /* Controls */
+    .controls{ margin-top:24px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center }
+
+    .switch{
+      --on: var(--accent);
+      position:relative; display:inline-flex; align-items:center; gap:10px; cursor:pointer; user-select:none;
+      background: rgba(255,255,255,.06); border:1px solid var(--glass-stroke);
+      padding:10px 12px; border-radius: 14px;
+    }
+    .switch input{ appearance:none; width:46px; height:26px; background: #0b1220; border:1px solid #283246; border-radius:999px; position:relative; outline:none; transition: all .25s ease; }
+    .switch input::after{ content:""; position:absolute; inset:3px; width:20px; height:20px; border-radius:50%; background: linear-gradient(180deg,#fff,#c2c8d0); box-shadow: 0 2px 6px rgba(0,0,0,.35); transform: translateX(0); transition: transform .25s ease; }
+    .switch input:checked{ background: linear-gradient(90deg, var(--accent), var(--accent2)); border-color:transparent }
+    .switch input:checked::after{ transform: translateX(20px) }
+    .switch span{ font-size:14px; opacity:.9 }
+
+    /* Footer */
+    .footer{ margin-top:18px; text-align:center; opacity:.65; font-size:12px }
+
+    /* Responsive tune */
+    @media (max-width:420px){ .hh,.mm,.ss{ letter-spacing:-1px } .sep{ letter-spacing:0 } }
+  </style>
+</head>
+<body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+  <main class="card" role="region" aria-label="Digital clock">
+    <div class="header">
+      <div class="title">NeoGlow Clock</div>
+      <div class="title" id="status" aria-live="polite" style="opacity:.6">Running…</div>
+    </div>
+
+    <section class="clock" aria-live="off">
+      <div class="time-part">
+        <span class="hh" id="hh">--</span>
+        <span class="sep">:</span>
+        <span class="mm" id="mm">--</span>
+        <span class="sep" id="sec-sep">:</span>
+        <span class="ss" id="ss">--</span>
+        <span class="ampm" id="ampm" hidden>AM</span>
+      </div>
+    </section>
+
+    <div class="meta">
+      <div class="date" id="date">—</div>
+      <div class="tz" id="tz">—</div>
+    </div>
+
+    <div class="controls" aria-label="Clock settings">
+      <label class="switch" title="Toggle 12/24-hour mode">
+        <input type="checkbox" id="modeToggle" />
+        <span>24‑hour</span>
+      </label>
+      <label class="switch" title="Show / hide seconds">
+        <input type="checkbox" id="secondsToggle" checked />
+        <span>Seconds</span>
+      </label>
+    </div>
+
+    <div class="footer">Built with HTML • CSS • JS</div>
+  </main>
+
+  <script>
+    (function(){
+      const el = (id) => document.getElementById(id);
+      const hh = el('hh'), mm = el('mm'), ss = el('ss'), ampm = el('ampm');
+      const dateEl = el('date'), tzEl = el('tz');
+      const secSep = el('sec-sep');
+      const modeToggle = el('modeToggle');
+      const secondsToggle = el('secondsToggle');
+
+      // Restore preferences
+      const PREF_KEY = 'neoClock:prefs:v1';
+      let prefs = { is24: true, showSeconds: true };
+      try{ const saved = JSON.parse(localStorage.getItem(PREF_KEY)); if(saved){ prefs = { ...prefs, ...saved }; } }catch{}
+      modeToggle.checked = prefs.is24;
+      secondsToggle.checked = prefs.showSeconds;
+
+      function savePrefs(){ localStorage.setItem(PREF_KEY, JSON.stringify({ is24: modeToggle.checked, showSeconds: secondsToggle.checked })); }
+      modeToggle.addEventListener('change', () => { savePrefs(); render(); ampm.hidden = modeToggle.checked; });
+      secondsToggle.addEventListener('change', () => { savePrefs(); secSep.style.display = ss.style.display = secondsToggle.checked ? '' : 'none'; });
+
+      // Initial visibility based on prefs
+      ampm.hidden = prefs.is24;
+      if(!prefs.showSeconds){ secSep.style.display = ss.style.display = 'none'; }
+
+      // Intl formatters
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local time';
+      tzEl.textContent = `Timezone: ${tz}`;
+
+      const dateFmt = new Intl.DateTimeFormat(undefined, { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+      function pad(n){ return n.toString().padStart(2,'0'); }
+
+      function render(){
+        const now = new Date();
+        let h = now.getHours();
+        const m = now.getMinutes();
+        const s = now.getSeconds();
+
+        const is24 = modeToggle.checked;
+        if(!is24){
+          const raw = h % 12 || 12;
+          ampm.textContent = h < 12 ? 'AM' : 'PM';
+          h = raw;
+        }
+
+        hh.textContent = pad(h);
+        mm.textContent = pad(m);
+        ss.textContent = pad(s);
+        dateEl.textContent = dateFmt.format(now);
+      }
+
+      // Tick every second, aligned to the next second boundary for accuracy
+      function start(){
+        render();
+        const drift = 1000 - (Date.now() % 1000);
+        setTimeout(()=>{
+          render();
+          setInterval(render, 1000);
+        }, drift);
+      }
+
+      // Accessibility: pause colon blink if page is hidden
+      document.addEventListener('visibilitychange', ()=>{
+        document.body.style.animationPlayState = document.hidden ? 'paused' : 'running';
+      });
+
+      start();
+    })();
+  </script>
+</body>
+</html>

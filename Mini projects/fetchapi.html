@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Crypto Tracker</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --up-color: #4ade80;
+            --down-color: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        header p {
+            color: var(--text-muted);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .crypto-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .crypto-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 1rem;
+        }
+
+        .coin-info h2 {
+            font-size: 1.25rem;
+        }
+
+        .coin-info span {
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .card-body {
+            margin-top: auto;
+        }
+
+        .price {
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .change-24h {
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .positive { color: var(--up-color); }
+        .negative { color: var(--down-color); }
+
+        .loading, .error {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            padding: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Crypto Markets</h1>
+        <p>Real-time prices fetched via CoinGecko API</p>
+    </header>
+
+    <main class="container" id="crypto-container">
+        <div class="loading">Fetching latest market data...</div>
+    </main>
+
+    <script>
+        // API URL to get top 6 coins by market cap vs USD
+        const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false';
+
+        async function fetchCryptoData() {
+            const container = document.getElementById('crypto-container');
+            
+            try {
+                const response = await fetch(API_URL);
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                
+                // Clear loading message
+                container.innerHTML = '';
+                
+                // Map and display data
+                data.forEach(coin => {
+                    const isPositive = coin.price_change_percentage_24h >= 0;
+                    const changeClass = isPositive ? 'positive' : 'negative';
+                    const changeSymbol = isPositive ? '▲' : '▼';
+
+                    const card = document.createElement('div');
+                    card.className = 'crypto-card';
+                    
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <img src="${coin.image}" alt="${coin.name}">
+                            <div class="coin-info">
+                                <h2>${coin.name}</h2>
+                                <span>${coin.symbol}</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="price">$${coin.current_price.toLocaleString()}</div>
+                            <div class="change-24h ${changeClass}">
+                                ${changeSymbol} ${Math.abs(coin.price_change_percentage_24h).toFixed(2)}% (24h)
+                            </div>
+                        </div>
+                    `;
+                    
+                    container.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                container.innerHTML = `
+                    <div class="error">
+                        <p>Failed to load data. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Fetch data immediately when page loads
+        fetchCryptoData();
+        
+        // Optional: Refresh data every 60 seconds
+        setInterval(fetchCryptoData, 60000);
+    </script>
+</body>
+</html>

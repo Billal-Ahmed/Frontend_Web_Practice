@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>strings</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+
+
+
+        console.log(typeof "Hello, World!"); // string
+        console.log(typeof 42); // number
+        console.log(typeof true); // boolean
+        console.log(typeof undefined); // undefined
+        console.log(typeof null); // object
+        console.log(typeof {}); // object
+        console.log(typeof []); // object
+
+
+
+
+        let objectFirst = {
+            "id": 1,
+            "name": "Leanne Graham",
+            "username": "Bret",
+            "email": "Sincere@april.biz",
+            "address": {
+                "street": "Kulas Light",
+                "suite": "Apt. 556",
+                "city": "Gwenborough",
+                "zipcode": "92998-3874",
+                "geo": {
+                    "lat": "-37.3159",
+                    "lng": "81.1496"
+                }
+            },
+            "phone": "1-770-736-8031 x56442",
+            "website": "hildegard.org",
+            "company": {
+                "name": "Romaguera-Crona",
+                "catchPhrase": "Multi-layered client-server neural-net",
+                "bs": "harness real-time e-markets"
+            }
+        };
+
+        for (let key in objectFirst) {
+            console.log(key + ": " + objectFirst[key]);
+            
+            
+            if (typeof objectFirst[key] === "object") {
+                for (let subKey in objectFirst[key]) {
+                    console.log("  " + subKey + ": " + objectFirst[key][subKey]);
+                    if (typeof objectFirst[key][subKey] === "object") {
+                        for (let subSubKey in objectFirst[key][subKey]) {
+                            console.log("    " + subSubKey + ": " + objectFirst[key][subKey][subSubKey]);
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        let st1 = "inserted string";
+
+
+        let x = `Hello, ${st1} World!`;
+
+
+        // console.log(x.length); // 13
+        // console.log(x.toUpperCase()); // "HELLO, WORLD!"
+        // console.log(x.toLowerCase()); // "hello, world!"
+        // console.log(x.indexOf("World")); // 7
+        // console.log(x.slice(0, 5)); // "Hello"
+        // console.log(x.replace("World", "JavaScript")); // "Hello, JavaScript!"  
+
+
+
+        console.log(`This is the variable value ${x}`); // "H"
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

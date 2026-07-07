@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Queries in html</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* box-sizing: border-box; */
+        }
+
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #f1f1f1;
+            flex-wrap: wrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        input[type="search"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+
+            outline: none;
+        }
+
+        .buttons-section {
+            display: flex;
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+
+
+        @media screen and (min-width: 1000px) {
+            /* .nav-bar {
+                display: none;
+            } */
+
+
+            body {
+                background-color: #e0e0e0;
+            }
+
+        }
+
+
+        @media screen and (max-width: 700px) {
+            /* .nav-bar {
+                display: none;
+            } */
+
+
+            /* body {
+                background-color: #e0e0e0;
+            } */
+             
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <header class="container">
+        <div class="logo">
+            <h1>Logo</h1>
+        </div>
+        <nav class="nav-bar">
+            <ul>
+                <li class="list-item"><a href="">Home</a></li>
+                <li class="list-item"><a href="">Services</a></li>
+                <li class="list-item"><a href="">Projects</a></li>
+                <li class="list-item"><a href="">About Us</a></li>
+                <li class="list-item"><a href="">Contact Us</a></li>
+            </ul>
+
+        </nav>
+        <div class="buttons-section">
+            <button class="btn">Login</button>
+            <button class="btn">Sign Up</button>
+            <input type="search" name="" placeholder="Seach Here" id="">
+
+        </div>
+    </header>
+
+</body>
+
+</html>

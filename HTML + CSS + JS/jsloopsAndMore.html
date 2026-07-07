@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            Loops and More
+        </h1>
+    </div>
+
+
+    <script>
+        // Loops
+        // for loop
+        // for (let i = 0; i < 5; i++) {
+        //     console.log(i);
+        // }
+
+        // while loop
+        // let j = 0;
+        // while (j < 5) {
+        //     console.log(j);
+        //     j++;
+        // }
+
+        // do-while loop
+        // let k = 0;
+        // do {
+        //     console.log(k);
+        //     k++;
+        // } while (k < 5);
+
+        // for...of loop
+        // const array = ['a', 'b', 'c'];
+        // for (const element of array) {
+        //     console.log(element);
+        // }
+        // list of 10 students
+        let listOfStudents = ['John', 'Jane', 'Jack', 'Shahid', 'James', 'Jenny', 'Joe', 'Jessica', 'Jacob', 'Julia'];    
+        // for (let student of listOfStudents){
+        //     document.write(student + '<br>');
+        // }
+        // for...in loop
+        // const object = { name: 'John', age: 30 };
+        // javascript object container 10 students data with their name , age, grade, city and country
+        const object1 = {
+            student1: { name: 'John', age: 30, grade: 'A', city: 'New York', country: 'USA' },
+            student2: { name: 'Jane', age: 28, grade: 'B', city: 'Los Angeles', country: 'USA' },
+            student3: { name: 'Jack', age: 25, grade: 'C', city: 'Chicago', country: 'USA' },
+            student4: { name: 'Shahid', age: 27, grade: 'A', city: 'Houston', country: 'USA' },
+            student5: { name: 'James', age: 29, grade: 'B', city: 'Phoenix', country: 'USA' },
+            student6: { name: 'Jenny', age: 26, grade: 'C', city: 'Philadelphia', country: 'USA' },
+            student7: { name: 'Joe', age: 24, grade: 'A', city: 'San Antonio', country: 'USA' },
+            student8: { name: 'Jessica', age: 31, grade: 'B', city: 'San Diego', country: 'USA' },
+            student9: { name: 'Jacob', age: 32, grade: 'C', city: 'Dallas', country: 'USA' },
+            student10: { name: 'Julia', age: 27, grade: 'A', city: 'San Jose', country: 'USA' } 
+        };
+
+        // js simple object with 5 properties and 5 values
+        // const simpleObject = {
+        //     name: 'John',
+        //     age: 30,
+        //     grade: 'A',
+        //     city: 'New York',
+        //     country: 'USA'
+        // };
+
+
+    //    access Object properties using for...in loop
+        // for (let student in object1) {
+        //     console.log(student);
+        //     console.log(object1[student]);
+
+        //     document.write(student + ': ' + object1[student].name + ', ' + object1[student].age + ', ' + object1[student].grade + ', ' + object1[student].city + ', ' + object1[student].country + '<br>'); 
+
+        // }
+
+        // string loop using for of loop
+        // let str = 'Hello World';
+        // for (let char of str) {
+        //     console.log(char);
+        //     document.write(char + '<br>');
+        // }
+
+
+
+
+        for(let i=0;i<=20;i++){
+            if(i==5){
+                continue;
+            }
+            if(i>10){
+                break;
+            }
+            console.log(i);
+        }
+
+
+
+        
+
+
+    </script>
+    
+</body>
+</html>

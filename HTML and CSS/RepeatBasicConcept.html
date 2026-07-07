@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        .container{
+            background-color: rgb(137, 147, 163);
+            border: 5px dashed black;
+            padding: 20px;
+        }   
+        .container h1{
+            color: red;
+            cursor: zoom-in;
+            /* background-color: turquoise; */
+        }
+        .container h2{
+            color: green;
+            cursor: e-resize;
+            /* background-color: burlywood; */
+        }
+        .container h3{
+            color: blue;
+            cursor: help;
+            /* background-color: azure; */
+        }
+        .container p{
+            color: white;
+            cursor: zoom-out;
+        }
+        .container button{
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    <style>
+
+</head>
+<body>
+
+    <div class="container" id="FirstContainer" style="">
+        <h1>dpakit academy</h1>
+        <h2>This the heading </h2>
+        <h3>And this is the 3rd heading</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
+        <button id="btn-first"> Click me</button>
+        <!-- <h1>sdlkfjsdkljfieifej</h1> -->
+        <br>
+
+        <a href="https://youtu.be/6Zy5VLcEbZc?si=jo-llBoKIVx91rht" target="_blank">Visit Our Youtube page</a>
+
+
+        
+    </div>
+
+
+    <img src="./img.jpeg" alt="Skardu Beautiful Image">
+
+    <a href="https://www.facebook.com/bill_aal__ahmed/" target="_blank">
+
+            <img src="./youtubeLogo.png" alt="">
+
+    </a alt =withd =200">
+    <script>
+        let firstContainer = document.getElementById("btn-first");
+        let flage = true;
+        
+
+        firstContainer.addEventListener("click", function(){
+            if(flage){
+            firstContainer.style.backgroundColor = "yellow";
+            flage = false;
+        }else{
+            firstContainer.style.backgroundColor = "rgb(137, 147, 163)";
+            flage = true;
+        }
+        });
+
+        
+        
+    </script>
+    
+</body>
+</html>

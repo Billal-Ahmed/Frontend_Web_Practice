@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API in javascript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* <-- Change 'height' to 'min-height' */
+            margin: 0;
+            padding: 20px;
+            /* Added padding so it doesn't touch screen edges when scrolling */
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        .sub-container {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+            overflow: auto scroll;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Fetch API in javascript</h1>
+        <button id="fetch-btn">Fetch Data</button>
+        <div class="sub-container">
+            <div class="result" id="result">
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        let btn = document.getElementById('fetch-btn')
+
+        // https://dummyjson.com/quotes
+        btn.addEventListener('click', () => {
+            fetch('https://dummyjson.com/quotes')
+                .then(res => res.json())
+                .then(data => {
+                    let html = '';
+                    data.quotes.forEach(quote => {
+                        html += `<p><strong>${quote.author}:</strong> ${quote.quote}</p>`;
+                    });
+                    document.getElementById('result').innerHTML = html;
+                })
+                .catch(err => console.error('Error fetching data:', err));
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
