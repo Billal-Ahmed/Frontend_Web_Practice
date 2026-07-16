@@ -40,12 +40,3 @@ This repository is designed to help students learn and practice frontend web dev
 
 
 
-
-
-
-
-
-
-
-
-minar change
