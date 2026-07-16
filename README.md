@@ -37,3 +37,15 @@ This repo includes:
 ## Purpose
 
 This repository is designed to help students learn and practice frontend web development in a simple, structured, and beginner-friendly way.
+
+
+
+
+
+
+
+
+
+
+
+minar change
